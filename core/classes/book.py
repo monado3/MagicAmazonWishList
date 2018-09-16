@@ -1,5 +1,4 @@
 import json
-import time
 from collections import defaultdict
 from threading import Thread
 
@@ -8,19 +7,10 @@ from selenium.webdriver.chrome.options import Options
 
 from core.classes.opac import OPAC
 from core.helpers.consts import DATA_DIR
-from core.helpers.functions import requests_get_as_fox
+from core.helpers.functions import exists_cache, requests_get_as_fox
 
 options = Options()
 options.set_headless(True)
-
-
-def exists_cache():
-    if DATA_DIR.joinpath('books.json').exists():
-        print('found cache file')
-        return True
-    else:
-        print('no cache file')
-        return False
 
 
 class Book:
@@ -41,24 +31,6 @@ class Book:
     def to_dict(self):
         return self.__dict__
 
-    def fetch_ISBN_from_amazon(self):
-        res = requests_get_as_fox(self.amazon_link)
-        li_tag = BeautifulSoup(res.text, features='lxml').find('b', text='ISBN-13:').find_parent('li')
-        try:
-            self.ISBN_13 = li_tag.text[-14:]
-        except AttributeError:
-            self.ISBN_13 = False
-
-    def fetch_opac_link_from_opac(self):
-        assert self.ISBN_13
-        res = requests_get_as_fox(OPAC.search_page_url, params={'kywd': self.ISBN_13})
-        try:
-            self.opac_link = OPAC.top_page_url + BeautifulSoup(res.text, features='lxml').find(
-                class_=OPAC.class_at_book_lis).find('a').get('href')
-        except AttributeError:
-            self.opac_link = False
-            self.num_registered = False
-
     def search_book_in_cache(self, cached_book_lis):
         for cached_book in cached_book_lis:
             if cached_book.amazon_book_title == self.amazon_book_title:
@@ -68,6 +40,23 @@ class Book:
         self.ISBN_13 = cached_book.ISBN_13
         self.opac_link = cached_book.opac_link
         self.num_registered = cached_book.num_registered
+
+    def fetch_ISBN_from_amazon(self):
+        res = requests_get_as_fox(self.amazon_link)
+        li_tag = BeautifulSoup(res.text, features='lxml').find('b', text='ISBN-13:').find_parent('li')
+        try:
+            self.ISBN_13 = li_tag.text[-14:]
+        except AttributeError:
+            self.ISBN_13 = False
+
+    def fetch_opac_link_from_opac(self):
+        res = requests_get_as_fox(OPAC.search_page_url, params={'kywd': self.ISBN_13})
+        try:
+            self.opac_link = OPAC.top_page_url + BeautifulSoup(res.text, features='lxml').find(
+                class_=OPAC.class_at_book_lis).find('a').get('href')
+        except AttributeError:
+            self.opac_link = False
+            self.num_registered = 0
 
     def fetch_reg_num_in_opac(self):
         assert self.opac_link
@@ -87,11 +76,8 @@ class Books:
 
         self.books_in_latest_wl = None
 
-    def has_books_in_cached_wl(self):
-        return bool(self.books_in_cached_wl)
-
     def check_book_is_cached(self):
-        if self.has_books_in_cached_wl():
+        if self.books_in_cached_wl:
             num_new_books = 0
             cached_book_title_lis = [book.amazon_book_title for book in self.books_in_cached_wl]
             for book in self.books_in_latest_wl:
@@ -116,10 +102,9 @@ class Books:
         print(f"fetching {len(books_has_no_ISBN)} book's ISBN from Amazon...")
         for book in books_has_no_ISBN:
             book.fetch_ISBN_from_amazon()
-            time.sleep(0.5)
 
     def fetch_opac_links(self):
-        books_no_cache = [book for book in self.books_in_latest_wl if not book.is_cached]
+        books_no_cache = [book for book in self.books_in_latest_wl if (not book.is_cached) and book.ISBN_13]
         print(f"fetching {len(books_no_cache)} book's opac link from opac...")
         threads = [Thread(target=book.fetch_opac_link_from_opac) for book in books_no_cache]
         for thread in threads:

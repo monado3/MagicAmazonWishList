@@ -1,9 +1,17 @@
 import pickle
-from pathlib import Path
 
 import requests
 
-SAVE_DIR = Path(__file__).parents[1].joinpath('pkls')
+from core.helpers.consts import DATA_DIR, SAVE_DIR
+
+
+def exists_cache():
+    if DATA_DIR.joinpath('books.json').exists():
+        print('found cache file')
+        return True
+    else:
+        print('no cache file')
+        return False
 
 
 def requests_get_as_fox(url, params=None, **kwargs):

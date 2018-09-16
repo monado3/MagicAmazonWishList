@@ -3,8 +3,8 @@ from selenium import webdriver
 from core.classes.amazon import Amazon, MagicAmazon
 from core.classes.book import Books
 
-flag = False
-if flag:
+
+def main():
     browser = webdriver.Chrome()
     amazon = Amazon(browser)
     amazon.access_book_wl()
@@ -22,6 +22,10 @@ if flag:
     books.fetch_reg_nums_in_opac()
     books.save_books_as_json()
 
-magic_amazon = MagicAmazon()
-magic_amazon.save_magic_wl_added_js()
-magic_amazon.open()
+    magic_amazon = MagicAmazon()
+    magic_amazon.save_magic_wl_added_js()
+    magic_amazon.open()
+
+
+if __name__ == '__main__':
+    main()
