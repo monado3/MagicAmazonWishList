@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"beautifulsoup4" = "*"
+requests = "*"
+selenium = "*"
+lxml = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+start = 'python main.py'
+setup = 'python project_helper/init.py'        # generate settings.py
+clear = 'python project_helper/clear_cache.py' # clear cache
+show  = 'python project_helper/open_magic_wl.py' # show wishlist/magic_wl.html
