@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 
 from core.classes.opac import OPAC
-from core.helpers.consts import DATA_DIR
-from core.helpers.functions import exists_cache, requests_get_as_fox
+from core.helper.const import DATA_DIR
+from core.helper.function import exists_cache, requests_get_as_fox
 
 options = Options()
 options.set_headless(True)

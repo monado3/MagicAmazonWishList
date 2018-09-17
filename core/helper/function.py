@@ -2,7 +2,7 @@ import pickle
 
 import requests
 
-from core.helpers.consts import DATA_DIR, SAVE_DIR
+from core.helper.const import DATA_DIR, SAVE_DIR
 
 
 def exists_cache():
