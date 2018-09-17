@@ -1,7 +1,7 @@
 from selenium import webdriver
 
-from core.classes.amazon import Amazon, MagicAmazon
-from core.classes.book import Books
+from core.cls.amazon import Amazon, MagicAmazon
+from core.cls.book import Books
 
 
 def main():

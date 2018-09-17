@@ -5,7 +5,7 @@ from threading import Thread
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 
-from core.classes.opac import OPAC
+from core.cls.opac import OPAC
 from core.helper.const import DATA_DIR
 from core.helper.function import exists_cache, requests_get_as_fox
 
