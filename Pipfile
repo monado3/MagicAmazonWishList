@@ -18,4 +18,5 @@ python_version = "3.7"
 start = 'python main.py'
 setup = 'python project_helper/init.py'        # generate settings.py
 clear = 'python project_helper/clear_cache.py' # clear cache
+opac-clear = 'python project_helper/opac_num_clear.py' # replace book.num_registered in books.json with null
 show  = 'python project_helper/open_magic_wl.py' # show wishlist/magic_wl.html

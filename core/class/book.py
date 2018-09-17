@@ -116,7 +116,7 @@ class Books:
         #     sleep(1)
 
     def fetch_reg_nums_in_opac(self):
-        books_no_reg_num = [book for book in self.books_in_latest_wl if book.num_registered is None]
+        books_no_reg_num = [book for book in self.books_in_latest_wl if book.num_registered is None and book.opac_link]
         print(f'fetching how many books are registered from OPAC (about {len(books_no_reg_num)} books)...')
         threads = [Thread(target=book.fetch_reg_num_in_opac) for book in books_no_reg_num]
         for thread in threads:
