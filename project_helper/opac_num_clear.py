@@ -1,4 +1,4 @@
-from helpers import add_proj_root_to_syspath
+from helper import add_proj_root_to_syspath
 
 add_proj_root_to_syspath()
 from core.helper.const import DATA_DIR
