@@ -3,6 +3,10 @@ Magic Amazon WishList
 In Amazon WishList, every book will automatically have a link
 to its detail page at U-tokyo OPAC , by just execution of one command.
 
+|Before|After|
+|----|----|
+|<img align="center" src="https://user-images.githubusercontent.com/36162674/45613446-59915d80-baa1-11e8-9581-3a02f348b558.png" ></img>|<img align="center" src="https://user-images.githubusercontent.com/36162674/45613621-e3412b00-baa1-11e8-97fd-d56e4888f155.png"></img>|
+
 ## Requirements
 - pipenv (Python Package Manager)
 - Google Chrome
