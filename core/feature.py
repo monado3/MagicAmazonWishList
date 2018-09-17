@@ -21,6 +21,12 @@ def fetch_from_Amazon():
     return books
 
 
+def gen_books_from_cache():
+    books = Books()
+    books.books_in_latest_wl = books.books_in_cached_wl
+    return books
+
+
 def fetch_from_OPAC_and_save(books: Books, mode: str):
     books.fetch_opac_links(mode)
     books.fetch_reg_nums_in_opac(mode)
