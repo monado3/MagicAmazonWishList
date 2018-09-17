@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"beautifulsoup4" = "*"
+beautifulsoup4 = "*"
 requests = "*"
 selenium = "*"
 lxml = "*"
@@ -15,7 +15,9 @@ lxml = "*"
 python_version = "3.7"
 
 [scripts]
-start = 'python main.py'
-setup = 'python project_helper/init.py'        # generate settings.py
-clear = 'python project_helper/clear_cache.py' # clear cache
-show  = 'python project_helper/open_magic_wl.py' # show wishlist/magic_wl.html
+fullupdate = 'python -m core.command.full_update'
+start = 'python -m core.command.main'
+opacupdate = 'python -m core.command.opac_update'
+show = 'python -m core.command.open_magic_wl'
+clear = 'python -m core.command.rm_books_json'
+setup = 'python -m core.command.generate_setting_file'

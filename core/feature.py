@@ -1,10 +1,10 @@
 from selenium import webdriver
 
-from core.classes.amazon import Amazon, MagicAmazon
-from core.classes.book import Books
+from core.cls.amazon import Amazon, MagicAmazon
+from core.cls.book import Books
 
-flag = False
-if flag:
+
+def fetch_from_Amazon():
     browser = webdriver.Chrome()
     amazon = Amazon(browser)
     amazon.access_book_wl()
@@ -18,10 +18,16 @@ if flag:
     books.check_book_is_cached()
     books.get_info_from_cache()
     books.fetch_ISBNs()
-    books.fetch_opac_links()
-    books.fetch_reg_nums_in_opac()
+    return books
+
+
+def fetch_from_OPAC_and_save(books: Books, mode: str):
+    books.fetch_opac_links(mode)
+    books.fetch_reg_nums_in_opac(mode)
     books.save_books_as_json()
 
-magic_amazon = MagicAmazon()
-magic_amazon.save_magic_wl_added_js()
-magic_amazon.open()
+
+def make_and_open_wishlist():
+    magic_amazon = MagicAmazon()
+    magic_amazon.save_magic_wl_added_js()
+    magic_amazon.open()

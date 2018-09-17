@@ -1,4 +1,4 @@
-from core.classes.amazon import MagicAmazon
+from core.cls.amazon import MagicAmazon
 
 
 def main():
