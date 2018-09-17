@@ -1,6 +1,3 @@
-from helper import add_proj_root_to_syspath
-
-add_proj_root_to_syspath()
 from core.cls.amazon import MagicAmazon
 
 

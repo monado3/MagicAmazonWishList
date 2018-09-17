@@ -1,5 +1,5 @@
 data/*
-settings.py
+setting.py
 wishlist/*
 .venv/
 images

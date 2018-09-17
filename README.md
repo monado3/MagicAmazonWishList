@@ -15,9 +15,9 @@ to its detail page at U-tokyo OPAC , by just execution of one command.
 1. You need install pip package.
 At the project root, `$ pipenv install`
 
-1. add your wishlist info to `settings.py`
-    1. To generate `settings.py`, `$ pipenv run setup`
-    1. You need to change your wishlist's privacy settings.
+1. add your wishlist info to `setting.py`
+    1. To generate `setting.py`, `$ pipenv run setup`
+    1. You need to change your wishlist's privacy setting.
         1. Visit [Amazon](https://www.amazon.co.jp) on the browser
         1. Move to the page of wishlist of books you'd like to cast a spell on
         1. Click `･･･` of the upper right
@@ -28,7 +28,7 @@ At the project root, `$ pipenv install`
         1. Open `Send list to others` of the upper right
         (this is very next to `･･･`)
         1. Copy `Permalink` to your clipboard
-    1. You need to edit `settings.py` as below.
+    1. You need to edit `setting.py` as below.
         1. Replace `please input your wishlist url for share` with your wishlist Permalink (Paste from clipboard)
 
 ## Usage
@@ -40,7 +40,7 @@ At the project root, `$ pipenv install`
         <td><code>$ pipenv run fullupdate</code></td>
         <td><code>$ pipenv run start</code></td>
         <td><code>$ pipenv run opacupdate</code></td>
-        <td><code>$ pipenv run open</code></td>
+        <td><code>$ pipenv run show</code></td>
     </tr>
     <tr>
         <td colspan="2">fetch the latest wishlist from Amazon</td>
@@ -87,7 +87,7 @@ At the project root, `$ pipenv install`
 |Command|Behavior|
 |----|----|
 |`$ pipenv run clear`|Delete the cached file (`data/books.json`)|
-|`$ pipenv run setup`|Generate `settings.py` (if it exists, overwrite)|
+|`$ pipenv run setup`|Generate `setting.py` (if it exists, overwrite)|
 
 ***Note:*** *when a book has cached information,<br>
 this program does not fetch the information of the book from U-tokyo OPAC.<br>

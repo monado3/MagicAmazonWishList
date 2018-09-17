@@ -3,14 +3,14 @@ import webbrowser
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from setting import AmazonInfo
 
 from core.cls.book import Book
 from core.helper.const import DATA_DIR, END_TAG_FOR_INNER_JSON, PS_ADDED_TO_WL, START_TAG_FOR_INNER_JSON, WL_DIR
-from settings import AmazonInfo
 
 
 class Amazon:
-    book_wishlist_share_link = AmazonInfo.book_wishlist_share_link
+    book_wishlist_share_link: str = AmazonInfo.book_wishlist_share_link
 
     wl_end_of_list_id = 'endOfListMarker'
 
@@ -53,9 +53,9 @@ class Amazon:
 
 
 class MagicAmazon:
-    start_tag_for_inner_json = START_TAG_FOR_INNER_JSON
-    end_tag_for_inner_json = END_TAG_FOR_INNER_JSON
-    postscript_to_wl = PS_ADDED_TO_WL
+    start_tag_for_inner_json: str = START_TAG_FOR_INNER_JSON
+    end_tag_for_inner_json: str = END_TAG_FOR_INNER_JSON
+    postscript_to_wl: str = PS_ADDED_TO_WL
 
     def __init__(self):
         with WL_DIR.joinpath('raw_wl.html').open('r') as f:
