@@ -1,7 +1,7 @@
 Magic Amazon WishList
 =================
 In Amazon WishList, every book will automatically have a link
-to its detail page at U-tokyo OPAC , by just execution of one command.
+to its detail page at [U-tokyo OPAC](https://opac.dl.itc.u-tokyo.ac.jp/opac/opac_search), by just execution of one command.
 
 |Before|After|
 |----|----|
@@ -9,7 +9,8 @@ to its detail page at U-tokyo OPAC , by just execution of one command.
 
 ## Requirements
 - pipenv (Python Package Manager)
-- Google Chrome
+- Google Chrome<br>
+***(I've confirmed the operation on Ubuntu 18.04 LTS)***
 
 ## Installation
 1. You need install pip package.
