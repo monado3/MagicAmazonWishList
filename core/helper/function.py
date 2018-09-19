@@ -35,10 +35,10 @@ def is_all_update(mode: str):
         raise TypeError("mode type should be str")
 
 
-def thread_lis_executioner(thread_lis: List[Thread], sleep_sec: int = 0):
+def thread_lis_executioner(thread_lis: List[Thread], interval_sec: int = 0):
     for thread in thread_lis:
         thread.start()
-        sleep(sleep_sec)
+        sleep(interval_sec)
     for thread in thread_lis:
         thread.join()
 

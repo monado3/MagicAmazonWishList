@@ -89,10 +89,6 @@ At the project root, `$ pipenv install`
 |`$ pipenv run clear`|Delete the cached file (`data/books.json`)|
 |`$ pipenv run setup`|Generate `setting.py` (if it exists, overwrite)|
 
-***Note:*** *when a book has cached information,<br>
-this program does not fetch the information of the book from U-tokyo OPAC.<br>
-Therefore, when you'd like to fetch the latest information,* `$ pipenv run opac clear && pipenv run start`
-
 ## Notes
 - This program uses Amazon.co.jp as default,<br>because this program is written on the assumption that it is used in Japan.<br>
 You need to change some parts of codes, if you'd like to use other countries' Amazon.
