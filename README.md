@@ -94,3 +94,9 @@ At the project root, `$ pipenv install`
 - This program uses Amazon.co.jp as default,<br>because this program is written on the assumption that it is used in Japan.<br>
 You need to change some parts of codes, if you'd like to use other countries' Amazon.
 - From the second time use of main.py, the execution time will be shorter thanks to cache.
+
+## License
+[MIT](https://github.com/monado3/MagicAmazonWishList/blob/master/LICENSE)
+
+## Author
+[monado3](https://github.com/monado3)
