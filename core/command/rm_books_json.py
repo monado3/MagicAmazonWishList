@@ -1,8 +1,9 @@
-from core.helper.const import BOOKS_JSON_FILE_NAME, DATA_DIR
+from core.helper.const import DATA_DIR
 
 
 def main():
-    DATA_DIR.joinpath(BOOKS_JSON_FILE_NAME).unlink()
+    for data_json in DATA_DIR.glob('*.json'):
+        data_json.unlink()
 
 
 if __name__ == '__main__':

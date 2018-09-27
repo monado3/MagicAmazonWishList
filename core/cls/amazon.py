@@ -3,25 +3,25 @@ import webbrowser
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
-from setting import AmazonInfo
 
 from core.cls.book import Book
-from core.helper.const import DATA_DIR, END_TAG_FOR_INNER_JSON, PS_ADDED_TO_WL, START_TAG_FOR_INNER_JSON, WL_DIR
+from core.helper.const import DATA_DIR, END_TAG_FOR_INNER_JSON, PS_ADDED_TO_WL, START_TAG_FOR_INNER_JSON, WL_DIR, \
+    get_json_name, get_magic_wl_html_name, get_raw_wl_html_name
 
 
 class Amazon:
-    book_wishlist_share_link: str = AmazonInfo.book_wishlist_share_link
-
     wl_end_of_list_id = 'endOfListMarker'
 
     books_list_xpath = '//*[@id="g-items"]/li'
     book_main_xpath = "//div[starts-with(@id, 'itemMain')]"
 
-    def __init__(self, browser: webdriver.Chrome):
+    def __init__(self, browser: webdriver.Chrome, wl_name: str, wl_link: str):
         self.browser = browser
+        self.wl_name: str = wl_name
+        self.wl_link: str = wl_link
 
     def access_book_wl(self):
-        self.browser.get(Amazon.book_wishlist_share_link)
+        self.browser.get(self.wl_link)
 
     def scroll_to_last_of_wl(self):
         def is_last_of_wl():
@@ -47,7 +47,7 @@ class Amazon:
         return books_lis
 
     def save_page_html(self):
-        with WL_DIR.joinpath('raw_wl.html').open('w') as f:
+        with WL_DIR.joinpath(get_raw_wl_html_name(self.wl_name)).open('w') as f:
             html = self.browser.page_source
             f.write(html)
 
@@ -57,23 +57,22 @@ class MagicAmazon:
     end_tag_for_inner_json: str = END_TAG_FOR_INNER_JSON
     postscript_to_wl: str = PS_ADDED_TO_WL
 
-    def __init__(self):
-        with WL_DIR.joinpath('raw_wl.html').open('r') as f:
+    def __init__(self, wl_name: str):
+        self.wl_name = wl_name
+        with WL_DIR.joinpath(get_raw_wl_html_name(self.wl_name)).open('r') as f:
             self.raw_wl = f.read()
-        self.magic_wl = None
 
     def save_magic_wl_added_js(self):
-        with WL_DIR.joinpath('magic_wl.html').open('w') as f_html:
+        with WL_DIR.joinpath(get_magic_wl_html_name(self.wl_name)).open('w') as f_html:
             f_html.write(self.raw_wl)
 
             f_html.write(MagicAmazon.start_tag_for_inner_json)
-            with DATA_DIR.joinpath('books.json').open('r') as f_json:
+            with DATA_DIR.joinpath(get_json_name(self.wl_name)).open('r') as f_json:
                 books_json = f_json.read()
                 f_html.write(books_json)
             f_html.write(MagicAmazon.end_tag_for_inner_json)
 
             f_html.write(MagicAmazon.postscript_to_wl)
 
-    @staticmethod
-    def open():
-        webbrowser.open(str(WL_DIR.joinpath('magic_wl.html')))
+    def open(self):
+        webbrowser.open(str(WL_DIR.joinpath(get_magic_wl_html_name(self.wl_name))))

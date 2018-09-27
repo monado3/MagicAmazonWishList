@@ -30,7 +30,13 @@ At the project root, `$ pipenv install`
         (this is very next to `･･･`)
         1. Copy `Permalink` to your clipboard
     1. You need to edit `setting.py` as below.
-        1. Replace `please input your wishlist url for share` with your wishlist Permalink (Paste from clipboard)
+        ```python
+        class AmazonInfo:
+           book_wishlist_dic = {
+               'wishlist name 1': 'wishlist link 1',
+               'wishlist name 2': 'wishlist link 2',
+           }
+        ```
 
 ## Usage
 
@@ -94,6 +100,8 @@ At the project root, `$ pipenv install`
 - This program uses Amazon.co.jp as default,<br>because this program is written on the assumption that it is used in Japan.<br>
 You need to change some parts of codes, if you'd like to use other countries' Amazon.
 - From the second time use of main.py, the execution time will be shorter thanks to cache.
+- If you'd like to use more than one wishlist, add wishlists' links to `book_wishlist_dic`(list) of `AmazonInfo` class
+in `setting.py`.
 
 ## License
 [MIT](https://github.com/monado3/MagicAmazonWishList/blob/master/LICENSE)

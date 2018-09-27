@@ -5,11 +5,11 @@ from typing import List
 
 import requests
 
-from core.helper.const import DATA_DIR, SAVE_DIR
+from core.helper.const import DATA_DIR, SAVE_DIR, get_json_name
 
 
-def exists_cache():
-    if DATA_DIR.joinpath('books.json').exists():
+def exists_cache(wl_name: str):
+    if DATA_DIR.joinpath(get_json_name(wl_name)).exists():
         print('found cache file')
         return True
     else:

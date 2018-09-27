@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 
 from core.cls.opac import OPAC
-from core.helper.const import BOOKS_JSON_FILE_NAME, DATA_DIR
+from core.helper.const import DATA_DIR, get_json_name
 from core.helper.function import exists_cache, is_all_update, requests_get_as_fox, thread_lis_executioner
 
 options = Options()
@@ -70,14 +70,16 @@ class Book:
 
 
 class Books:
-    def __init__(self):
-        if exists_cache():
-            with DATA_DIR.joinpath(BOOKS_JSON_FILE_NAME).open('r') as f:
+    def __init__(self, wl_name: str, books_in_latest_wl: List[Book] or None):
+        self.wl_name: str = wl_name
+        self.books_in_latest_wl: List[Book] = books_in_latest_wl
+        print(f'\nstart the process of [{self.wl_name}]')
+
+        if exists_cache(self.wl_name):
+            with DATA_DIR.joinpath(get_json_name(self.wl_name)).open('r') as f:
                 self.books_in_cached_wl = [Book(**book_ins_vars_dic) for book_ins_vars_dic in json.load(f)]
         else:
             self.books_in_cached_wl: List[Book] = None
-
-        self.books_in_latest_wl: List[Book] = None
 
     def check_book_is_cached(self):
         if self.books_in_cached_wl:
@@ -127,6 +129,6 @@ class Books:
     def save_books_as_json(self):
         for book in self.books_in_latest_wl:
             book.is_cached = True
-        with DATA_DIR.joinpath(BOOKS_JSON_FILE_NAME).open('w') as f:
+        with DATA_DIR.joinpath(get_json_name(self.wl_name)).open('w') as f:
             book_ins_vars_dic_lis = [book.to_dict() for book in self.books_in_latest_wl]
             json.dump(book_ins_vars_dic_lis, f, indent=2, ensure_ascii=False)
