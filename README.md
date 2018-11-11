@@ -9,10 +9,13 @@ to its detail page at [U-tokyo OPAC](https://opac.dl.itc.u-tokyo.ac.jp/opac/opac
 
 ## Requirements
 - pipenv (Python Package Manager)
-- Google Chrome<br>
-***(I've confirmed the operation on Ubuntu 18.04 LTS)***
+- `Google Chrome` or `Chromium`<br> 
+***(I've confirmed the operation on `Ubuntu 18.04 LTS` and `Manjaro`)***
 
 ## Installation
+1. Require `pipenv` module due to easy package install.
+`$ pip install pipenv`
+
 1. You need install pip package.
 At the project root, `$ pipenv install`
 
@@ -95,6 +98,7 @@ At the project root, `$ pipenv install`
 |----|----|
 |`$ pipenv run clear`|Delete the cached file (`data/books.json`)|
 |`$ pipenv run setup`|Generate `setting.py` (if it exists, overwrite)|
+|`$ pipenv run help`|Open [this](https://github.com/monado3/MagicAmazonWishList) page (Needs environment variable `$BROWSER`)|
 
 ## Notes
 - This program uses Amazon.co.jp as default,<br>because this program is written on the assumption that it is used in Japan.<br>
